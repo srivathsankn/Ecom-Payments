@@ -1,5 +1,6 @@
 package com.srivath.payment.controllers;
 
+import com.razorpay.RazorpayException;
 import com.srivath.payment.dtos.PaymentDto;
 import com.srivath.payment.models.Payment;
 import com.srivath.payment.repositories.PaymentRepository;
@@ -24,7 +25,7 @@ public class PaymentController {
     }
 
     @PostMapping("/paymentLink")
-    public Payment createPayment(@RequestBody PaymentDto paymentDto) {
+    public Payment createPayment(@RequestBody PaymentDto paymentDto) throws RazorpayException {
         // Logic to create a new payment
         // This will typically involve calling a service method that interacts with the repository
         return paymentService.createPayment(paymentDto);
@@ -33,6 +34,6 @@ public class PaymentController {
     @GetMapping("/callback")
     public void updatePaymentStatus(@RequestParam Long orderId, @RequestParam String razorpay_payment_id, @RequestParam String razorpay_payment_link_id, @RequestParam String razorpay_payment_link_reference_id, @RequestParam String razorpay_payment_link_status, @RequestParam String razorpay_signature ) {
         // Logic to update the status of a payment
-        paymentService.updatePaymentStatus(orderId, razorpay_payment_link_status );
+        paymentService.updatePaymentStatus(orderId, razorpay_payment_link_status, razorpay_payment_link_id, razorpay_payment_id, razorpay_payment_link_reference_id, razorpay_signature);
     }
 }

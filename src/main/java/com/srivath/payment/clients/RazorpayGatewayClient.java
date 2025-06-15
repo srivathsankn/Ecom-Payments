@@ -34,9 +34,8 @@ public class RazorpayGatewayClient {
 //        }
 //    }
 
-    public String createPaymentLink(Long orderId, Double amount, String customerName, String customerEmail, String customerPhone) {
+    public String createPaymentLink(Long orderId, Double amount, String customerName, String customerEmail, String customerPhone) throws RazorpayException {
 
-        try {
             // Create a new payment object
             //System.out.println(razorpayClient);
             if (razorpayClient == null) {
@@ -73,12 +72,6 @@ public class RazorpayGatewayClient {
             // Create the payment link
             PaymentLink paymentLink = razorpayClient.paymentLink.create(paymentRequest);
             return paymentLink.get("short_url").toString(); // Return the payment link
-
-        } catch (RazorpayException e) {
-            e.printStackTrace();
-            return null; // Handle exception appropriately
-        }
-
 
     }
 }
