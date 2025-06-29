@@ -17,6 +17,10 @@ public class Payment {
     private Long orderId;
     private String paymentLink;
     private Double amount;
+    private String paymentDate; //for Part Payments
+    private String paymentAdditionalInfo; // for Part Payments
+    private Double paidAmount; // for Part Payments
+    private String partPaymentMethod; // for Part Payments
     private String status;
     private String razorpayPaymentLinkReferenceId;
     private String razorpayPaymentId;
@@ -25,6 +29,26 @@ public class Payment {
     private String razorpaySignature;
 
     public Payment() {
+    }
+
+    public Payment (Payment copy)
+    {
+        this.userName = copy.userName;
+        this.userEmail = copy.userEmail;
+        this.userPhone = copy.userPhone;
+        this.orderId = copy.orderId;
+        this.paymentLink = copy.paymentLink;
+        this.amount = copy.amount;
+        this.paymentDate = copy.paymentDate;
+        this.paymentAdditionalInfo = copy.paymentAdditionalInfo;
+        this.paidAmount = copy.paidAmount;
+        this.partPaymentMethod = copy.partPaymentMethod;
+        this.status = copy.status;
+        this.razorpayPaymentLinkReferenceId = copy.razorpayPaymentLinkReferenceId;
+        this.razorpayPaymentId = copy.razorpayPaymentId;
+        this.razorpayPaymentLinkId = copy.razorpayPaymentLinkId;
+        this.razorpayPaymentLinkStatus = copy.razorpayPaymentLinkStatus;
+        this.razorpaySignature = copy.razorpaySignature;
     }
 
     public Payment(Long paymentId, Long orderId, String paymentMethod, Double amount, String status) {
@@ -91,6 +115,38 @@ public class Payment {
         this.amount = amount;
     }
 
+    public String getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(String paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public String getPaymentAdditionalInfo() {
+        return paymentAdditionalInfo;
+    }
+
+    public void setPaymentAdditionalInfo(String paymentAdditionalInfo) {
+        this.paymentAdditionalInfo = paymentAdditionalInfo;
+    }
+
+    public Double getPaidAmount() {
+        return paidAmount;
+    }
+
+    public void setPaidAmount(Double paidAmount) {
+        this.paidAmount = paidAmount;
+    }
+
+    public String getPartPaymentMethod() {
+        return partPaymentMethod;
+    }
+
+    public void setPartPaymentMethod(String partPaymentMethod) {
+        this.partPaymentMethod = partPaymentMethod;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -137,5 +193,28 @@ public class Payment {
 
     public void setRazorpaySignature(String razorpaySignature) {
         this.razorpaySignature = razorpaySignature;
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "paymentId=" + paymentId +
+                ", userName='" + userName + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", orderId=" + orderId +
+                ", paymentLink='" + paymentLink + '\'' +
+                ", amount=" + amount +
+                ", paymentDate='" + paymentDate + '\'' +
+                ", paymentAdditionalInfo='" + paymentAdditionalInfo + '\'' +
+                ", paidAmount=" + paidAmount +
+                ", partPaymentMethod='" + partPaymentMethod + '\'' +
+                ", status='" + status + '\'' +
+                ", razorpayPaymentLinkReferenceId='" + razorpayPaymentLinkReferenceId + '\'' +
+                ", razorpayPaymentId='" + razorpayPaymentId + '\'' +
+                ", razorpayPaymentLinkId='" + razorpayPaymentLinkId + '\'' +
+                ", razorpayPaymentLinkStatus='" + razorpayPaymentLinkStatus + '\'' +
+                ", razorpaySignature='" + razorpaySignature + '\'' +
+                '}';
     }
 }

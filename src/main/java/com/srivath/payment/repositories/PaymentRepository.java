@@ -10,6 +10,7 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
     List<Payment> findByOrderId(Long orderId);
 
+    List<Payment> findByOrderIdAndRazorpayPaymentLinkId(Long orderId, String razorpayPaymentLinkId);
     // Custom query methods can be defined here if needed
     // For example, to find payments by orderId:
     // List<Payments> findByOrderId(Long orderId);

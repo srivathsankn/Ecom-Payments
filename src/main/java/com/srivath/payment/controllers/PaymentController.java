@@ -32,7 +32,7 @@ public class PaymentController {
     }
 
     @GetMapping("/callback")
-    public void updatePaymentStatus(@RequestParam Long orderId, @RequestParam String razorpay_payment_id, @RequestParam String razorpay_payment_link_id, @RequestParam String razorpay_payment_link_reference_id, @RequestParam String razorpay_payment_link_status, @RequestParam String razorpay_signature ) {
+    public void updatePaymentStatus(@RequestParam Long orderId, @RequestParam String razorpay_payment_id, @RequestParam String razorpay_payment_link_id, @RequestParam String razorpay_payment_link_reference_id, @RequestParam String razorpay_payment_link_status, @RequestParam String razorpay_signature ) throws RazorpayException {
         // Logic to update the status of a payment
         paymentService.updatePaymentStatus(orderId, razorpay_payment_link_status, razorpay_payment_link_id, razorpay_payment_id, razorpay_payment_link_reference_id, razorpay_signature);
     }

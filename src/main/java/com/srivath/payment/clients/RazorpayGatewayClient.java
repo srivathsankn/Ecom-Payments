@@ -69,9 +69,15 @@ public class RazorpayGatewayClient {
             paymentRequest.put("callback_url",razorpayCallbackUrl+"?orderId="+orderId);
             paymentRequest.put("callback_method","get");
 
+
             // Create the payment link
             PaymentLink paymentLink = razorpayClient.paymentLink.create(paymentRequest);
             return paymentLink.get("short_url").toString(); // Return the payment link
-
     }
+
+    public Payment getPaymentDetails(String paymentId) throws RazorpayException {
+        // Fetch the payment details using the Razorpay client
+        return razorpayClient.payments.fetch(paymentId);
+    }
+
 }
