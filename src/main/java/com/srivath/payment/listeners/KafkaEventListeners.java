@@ -51,6 +51,7 @@ public class KafkaEventListeners {
                 paymentLinkCreatedEvent.setAmount(payment.getAmount());
                 paymentLinkCreatedEvent.setPaymentLink(payment.getPaymentLink());
                 // Send PaymentLinkCreatedEvent to Kafka
+                System.out.println("Pushing PaymentLinkCreated Event : " + paymentLinkCreatedEvent);
                 kafkaTemplate.send(topicName, paymentLinkCreatedEvent);
             }
             catch (RazorpayException e) {

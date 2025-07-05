@@ -120,13 +120,14 @@ public class PaymentService {
 
         //System.out.println("Payment record to be persisted: " + payment);
         // Save the updated payment status
-        paymentRepository.save(payment);
-
+        Payment savedPayment = paymentRepository.save(payment);
+        payment = savedPayment;
         // Create and populate the PaymentCompletedEvent
         payments = paymentRepository.findByOrderId(orderId);
 
         PaymentCompletedEvent paymentCompletedEvent = new PaymentCompletedEvent();
         PaymentCompletedDto dto = new PaymentCompletedDto();
+        dto.setPaymentId(payment.getPaymentId().toString());
         dto.setOrderId(payment.getOrderId());
         dto.setAmount(payment.getAmount());
         dto.setUserName(payment.getUserName());
@@ -145,6 +146,7 @@ public class PaymentService {
         dto.setStatus(payments.get(payments.size()-1).getStatus());
         paymentCompletedEvent.setPaymentDto(dto);
         // Send the event to Kafka
+        System.out.println("Sending PaymentCompletedEvent to Kafka: " + paymentCompletedEvent);
         kafkaTemplate.send(topicName, paymentCompletedEvent);
     }
 
